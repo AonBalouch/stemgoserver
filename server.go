@@ -18,11 +18,12 @@ func main() {
 	}
 
 	// Start the server
-	http.HandleFunc("/", handleRequest)
+	http.HandleFunc("/", Handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-func handleRequest(w http.ResponseWriter, r *http.Request) {
+// Handler is the exported function that Vercel will invoke
+func Handler(w http.ResponseWriter, r *http.Request) {
 	// Run your main.go file using "go run main.go" command
 	cmd := exec.Command("go", "run", "main.go")
 	cmd.Stdout = os.Stdout
